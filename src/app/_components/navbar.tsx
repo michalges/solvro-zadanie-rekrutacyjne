@@ -16,14 +16,13 @@ import { ModeToggle } from "./mode-toggle";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-center border-b-1 border-gray-200">
+    <nav className="flex justify-center border-b">
       <div className="container flex w-full items-center p-4">
         <div className="flex w-full items-center space-x-4">
           <Link href="/" className="" passHref>
             <div className="relative aspect-square h-10">
               <Image
                 src="/placeholder.png"
-                layout="intrinsic"
                 width={128}
                 height={128}
                 alt="Logo"
