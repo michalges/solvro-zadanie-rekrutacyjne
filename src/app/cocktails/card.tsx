@@ -1,3 +1,4 @@
+import { Heart } from "lucide-react";
 import React from "react";
 
 import { Cocktail } from "@/app/types";
@@ -57,7 +58,15 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             <div className="container flex w-full flex-col p-4 md:flex-row-reverse">
               <DrawerHeader className="md:w-1/3">
                 <DrawerTitle>{cocktail.name}</DrawerTitle>
-                <Badge>{cocktail.category}</Badge>
+                <div className="flex space-x-2">
+                  <Badge>{cocktail.category}</Badge>
+                  {cocktail.alcoholic ? (
+                    <Badge>Alcoholic</Badge>
+                  ) : (
+                    <Badge>Non-alcoholic</Badge>
+                  )}
+                </div>
+
                 <DrawerDescription>{cocktail.instructions}</DrawerDescription>
               </DrawerHeader>
               <img
@@ -82,14 +91,17 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             </div> */}
             <DrawerFooter className="">
               <DrawerClose asChild>
-                <Button variant="outline" className="mx-auto max-w-md min-w-sm">
+                <Button variant="outline" className="mx-auto max-w-md min-w-48">
                   Close
                 </Button>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-        <Button>like</Button>
+        <Button>
+          <Heart></Heart>
+          {/* <Heart fill="#fff"></Heart> */}
+        </Button>
       </CardFooter>
     </Card>
   );
