@@ -12,8 +12,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
-import { Button } from "../../components/ui/button";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "./mode-toggle";
 
 export default function Navbar() {
   return (
@@ -35,7 +34,7 @@ export default function Navbar() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/" className="font-semibold">
+                <NavigationMenuLink href="/" className="font-medium">
                   Home
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -45,7 +44,12 @@ export default function Navbar() {
                   <NavigationMenuLink href="/cocktails">
                     Browse All
                   </NavigationMenuLink>
-                  <NavigationMenuLink>Favorites</NavigationMenuLink>
+                  <NavigationMenuLink href="/favorites">
+                    Favorites
+                  </NavigationMenuLink>
+                  <NavigationMenuLink href="/ingredients">
+                    Ingredients
+                  </NavigationMenuLink>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>

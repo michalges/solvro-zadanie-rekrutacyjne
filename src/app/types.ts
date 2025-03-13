@@ -9,3 +9,15 @@ export interface Cocktail {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Ingredient {
+  id: number;
+  name: string;
+  description: string | null;
+  alcohol: boolean;
+  type: string | null;
+  percentage: number | null;
+  imageUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+}

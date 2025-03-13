@@ -1,7 +1,6 @@
 import { Cocktail } from "@/app/types";
 
-import Card from "./card";
-import CocktailCard from "./card";
+import Card from "../_components/card";
 
 export default async function Page() {
   const data = await fetch("https://cocktails.solvro.pl/api/v1/cocktails");

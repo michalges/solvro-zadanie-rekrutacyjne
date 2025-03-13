@@ -1,5 +1,7 @@
+"use client";
+
 import { Heart } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Cocktail } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
@@ -24,15 +26,25 @@ import {
 } from "@/components/ui/drawer";
 
 const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setIsFavorite(favorites.includes(cocktail.id));
+  }, [cocktail.id]);
+
+  const handleFavorite = () => {
+    let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    if (favorites.includes(cocktail.id)) {
+      favorites = favorites.filter((id: string) => id !== cocktail.id);
+    } else {
+      favorites.push(cocktail.id);
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    setIsFavorite(!isFavorite);
+  };
+
   return (
-    // <div className="rounded-md border p-4 shadow-md">
-    //   <img src={cocktail.imageUrl} alt={cocktail.name} />
-    //   <h2>{cocktail.name}</h2>
-    //   <p>{cocktail.category}</p>
-    //   <p>{cocktail.glass}</p>
-    //   <p>{cocktail.instructions}</p>
-    //   <p>{cocktail.alcoholic ? "Alcoholic" : "Non-Alcoholic"}</p>
-    // </div>
     <Card className="">
       <CardHeader>
         <CardTitle>{cocktail.name}</CardTitle>
@@ -55,16 +67,14 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             <Button variant="outline">Details</Button>
           </DrawerTrigger>
           <DrawerContent className="">
-            <div className="container flex w-full flex-col p-4 md:flex-row-reverse">
+            <div className="container flex h-full max-h-full w-full flex-col overflow-auto p-4 md:flex-row-reverse">
               <DrawerHeader className="md:w-1/3">
                 <DrawerTitle>{cocktail.name}</DrawerTitle>
                 <div className="flex space-x-2">
                   <Badge>{cocktail.category}</Badge>
-                  {cocktail.alcoholic ? (
-                    <Badge>Alcoholic</Badge>
-                  ) : (
-                    <Badge>Non-alcoholic</Badge>
-                  )}
+                  <Badge>
+                    {cocktail.alcoholic ? "Alcoholic" : "Non-alcoholic"}
+                  </Badge>
                 </div>
 
                 <DrawerDescription>{cocktail.instructions}</DrawerDescription>
@@ -75,20 +85,6 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
                 className="rounded-2xl md:w-1/3"
               />
             </div>
-            {/* <div className="space-y-2 p-4">
-              <div>
-                <p className="text-sm">Served in:</p>
-                <p className="text-md">{cocktail.glass}</p>
-              </div>
-              <div>
-                <p className="text-sm">Alcoholic:</p>
-                <p className="text-md">{cocktail.alcoholic ? "Yes" : "No"}</p>
-              </div>
-              <div>
-                <p className="text-sm">Id:</p>
-                <p className="text-md">{cocktail.id}</p>
-              </div>
-            </div> */}
             <DrawerFooter className="">
               <DrawerClose asChild>
                 <Button variant="outline" className="mx-auto max-w-md min-w-48">
@@ -98,9 +94,8 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-        <Button>
-          <Heart></Heart>
-          {/* <Heart fill="#fff"></Heart> */}
+        <Button onClick={handleFavorite}>
+          <Heart fill={isFavorite ? "#fff" : "none"} />
         </Button>
       </CardFooter>
     </Card>

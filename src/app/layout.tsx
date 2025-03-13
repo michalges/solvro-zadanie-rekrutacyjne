@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import Navbar from "@/app/components/Navbar";
+import Navbar from "@/app/_components/navbar";
 
 import "./globals.css";
 
