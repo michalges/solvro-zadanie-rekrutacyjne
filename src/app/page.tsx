@@ -19,8 +19,7 @@ export default function Home() {
       const data = await response.json();
       const mappedCocktails = data.data.map((cocktail: Cocktail) => ({
         title: cocktail.name,
-        link: "#", // Assuming there's no specific link for each cocktail
-        thumbnail: cocktail.imageUrl, // Assuming the image URL is in the 'image' field
+        thumbnail: cocktail.imageUrl,
       }));
       setCocktails(mappedCocktails);
     }
@@ -34,7 +33,7 @@ export default function Home() {
 export const products = [
   {
     title: "Moonbeam",
-    link: "https://gomoonbeam.com",
+    link: "https",
     thumbnail: "/placeholder.png",
   },
   {

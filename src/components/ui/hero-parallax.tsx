@@ -18,13 +18,11 @@ export const HeroParallax = ({
 }: {
   products: {
     title: string;
-    link: string;
     thumbnail: string;
   }[];
 }) => {
-  const firstRow = products.slice(0, 5);
-  const secondRow = products.slice(5, 10);
-  const thirdRow = products.slice(10, 15);
+  const firstRow = products.slice(0, 7);
+  const secondRow = products.slice(7, 14);
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -41,64 +39,28 @@ export const HeroParallax = ({
     useTransform(scrollYProgress, [0, 1], [0, -1000]),
     springConfig,
   );
-  const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig,
-  );
-  const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.1, 1]),
-    springConfig,
-  );
-  const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [20, 0]),
-    springConfig,
-  );
-  const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
-    springConfig,
-  );
 
   return (
     <div
       ref={ref}
-      className="relative flex h-[300vh] flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]"
+      className="relative flex flex-col self-auto overflow-hidden antialiased"
     >
       <Header />
-      <motion.div
-        style={{
-          rotateX,
-          rotateZ,
-          translateY,
-          opacity,
-        }}
-        className=""
-      >
-        <motion.div className="mb-20 flex flex-row-reverse space-x-20 space-x-reverse">
+      <motion.div>
+        <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
-              scrollYProgress={scrollYProgress}
               key={product.title}
             />
           ))}
         </motion.div>
-        <motion.div className="mb-20 flex flex-row space-x-20">
+        <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateXReverse}
-              scrollYProgress={scrollYProgress}
-              key={product.title}
-            />
-          ))}
-        </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-20 space-x-reverse">
-          {thirdRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateX}
-              scrollYProgress={scrollYProgress}
               key={product.title}
             />
           ))}
@@ -110,15 +72,15 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    // <div className="relative top-0 left-0 z-20 ml-24 max-w-4xl space-y-8 rounded-4xl bg-white p-18 dark:bg-gray-900">
-    <div className="relative top-0 left-0 z-20 mx-auto w-full max-w-7xl space-y-8 px-4 py-20 md:py-40">
+    <div className="mx-auto w-full max-w-7xl space-y-8 px-4 py-16 opacity-90 md:py-36">
       <h1 className="text-2xl font-bold md:text-7xl dark:text-white">
         Solvro cocktails
       </h1>
       <p className="mt-8 max-w-2xl text-base md:text-xl dark:text-neutral-200">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
+        Discover a variety of delicious cocktails crafted to perfection. Whether
+        you're looking for a classic drink or something new, our collection has
+        something for everyone. Explore our recipes and find your next favorite
+        cocktail.
       </p>
       <Button variant="outline" className="">
         <Link href="/cocktails">Browse cocktails</Link>
@@ -130,48 +92,33 @@ export const Header = () => {
 export const ProductCard = ({
   product,
   translate,
-  scrollYProgress,
 }: {
   product: {
     title: string;
-    link: string;
     thumbnail: string;
   };
   translate: MotionValue<number>;
-  scrollYProgress: MotionValue<number>;
 }) => {
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
-  const scaleX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.9, 1]),
-    springConfig,
-  );
-
   return (
     <motion.div
       style={{
         x: translate,
-        scaleX,
       }}
       whileHover={{
-        y: -20,
+        y: -10,
       }}
       key={product.title}
-      className="group/product relative h-96 w-[30rem] shrink-0"
+      className="group/product relative h-96 w-72 shrink-0"
     >
-      <Link
-        href={product.link}
-        className="block group-hover/product:shadow-2xl"
-      >
-        <Image
-          src={product.thumbnail}
-          height="600"
-          width="600"
-          className="absolute inset-0 h-full w-full object-cover object-left-top"
-          alt={product.title}
-        />
-      </Link>
-      <div className="absolute inset-0 h-full w-full bg-black opacity-0 group-hover/product:opacity-80"></div>
-      <h2 className="absolute bottom-4 left-4 text-white opacity-0 group-hover/product:opacity-100">
+      <Image
+        src={product.thumbnail}
+        height="600"
+        width="600"
+        className="absolute inset-0 h-full w-full rounded-2xl object-cover object-center"
+        alt={product.title}
+      />
+      <div className="absolute inset-0 h-full w-full rounded-2xl bg-black opacity-0 group-hover/product:opacity-80"></div>
+      <h2 className="absolute bottom-4 left-4 text-sm text-white opacity-0 group-hover/product:opacity-100">
         {product.title}
       </h2>
     </motion.div>
