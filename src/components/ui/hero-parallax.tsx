@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { InteractiveHoverButton } from "../magicui/interactive-hover-button";
 import { Button } from "./button";
 
 export const HeroParallax = ({
@@ -32,11 +33,11 @@ export const HeroParallax = ({
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 1000]),
+    useTransform(scrollYProgress, [0, 1], [-100, 200]),
     springConfig,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -1000]),
+    useTransform(scrollYProgress, [0, 1], [100, -200]),
     springConfig,
   );
 
@@ -47,7 +48,7 @@ export const HeroParallax = ({
     >
       <Header />
       <motion.div>
-        <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
+        <motion.div className="mb-5 flex flex-row space-x-5">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -82,9 +83,9 @@ export const Header = () => {
         something for everyone. Explore our recipes and find your next favorite
         cocktail.
       </p>
-      <Button variant="outline" className="">
+      <InteractiveHoverButton>
         <Link href="/cocktails">Browse cocktails</Link>
-      </Button>
+      </InteractiveHoverButton>
     </div>
   );
 };
