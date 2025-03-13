@@ -5,7 +5,12 @@ const nextConfig: NextConfig = {
 };
 module.exports = {
   images: {
-    domains: ["cocktails.solvro.pl"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cocktails.solvro.pl",
+      },
+    ],
   },
 };
 export default nextConfig;
