@@ -1,10 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { HeroParallax } from "@/components/ui/hero-parallax";
 
+import { Cocktail } from "./types";
+
 export default function Home() {
-  return <HeroParallax products={products} />;
+  const [cocktails, setCocktails] = useState([]);
+
+  useEffect(() => {
+    async function fetchCocktails() {
+      const response = await fetch(
+        "https://cocktails.solvro.pl/api/v1/cocktails",
+      );
+      const data = await response.json();
+      const mappedCocktails = data.data.map((cocktail: Cocktail) => ({
+        title: cocktail.name,
+        link: "#", // Assuming there's no specific link for each cocktail
+        thumbnail: cocktail.imageUrl, // Assuming the image URL is in the 'image' field
+      }));
+      setCocktails(mappedCocktails);
+    }
+
+    fetchCocktails();
+  }, []);
+
+  return <HeroParallax products={cocktails} />;
 }
 
 export const products = [

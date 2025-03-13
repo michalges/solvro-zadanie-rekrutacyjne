@@ -54,6 +54,7 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             : cocktail.instructions}
         </CardDescription>
       </CardHeader>
+      <div className="grow"></div>
       <CardContent>
         <img
           src={cocktail.imageUrl}

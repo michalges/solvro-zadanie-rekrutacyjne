@@ -46,7 +46,7 @@ export const HeroParallax = ({
     springConfig,
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+    useTransform(scrollYProgress, [0, 0.2], [0.1, 1]),
     springConfig,
   );
   const rotateZ = useSpring(
@@ -57,6 +57,7 @@ export const HeroParallax = ({
     useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
     springConfig,
   );
+
   return (
     <div
       ref={ref}
@@ -77,6 +78,7 @@ export const HeroParallax = ({
             <ProductCard
               product={product}
               translate={translateX}
+              scrollYProgress={scrollYProgress}
               key={product.title}
             />
           ))}
@@ -86,6 +88,7 @@ export const HeroParallax = ({
             <ProductCard
               product={product}
               translate={translateXReverse}
+              scrollYProgress={scrollYProgress}
               key={product.title}
             />
           ))}
@@ -95,6 +98,7 @@ export const HeroParallax = ({
             <ProductCard
               product={product}
               translate={translateX}
+              scrollYProgress={scrollYProgress}
               key={product.title}
             />
           ))}
@@ -106,7 +110,8 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="relative top-0 left-0 z-20 mx-auto w-full max-w-7xl px-4 py-20 md:py-40">
+    // <div className="relative top-0 left-0 z-20 ml-24 max-w-4xl space-y-8 rounded-4xl bg-white p-18 dark:bg-gray-900">
+    <div className="relative top-0 left-0 z-20 mx-auto w-full max-w-7xl space-y-8 px-4 py-20 md:py-40">
       <h1 className="text-2xl font-bold md:text-7xl dark:text-white">
         Solvro cocktails
       </h1>
@@ -115,7 +120,7 @@ export const Header = () => {
         We are a team of passionate developers and designers that love to build
         amazing products.
       </p>
-      <Button variant="outline">
+      <Button variant="outline" className="">
         <Link href="/cocktails">Browse cocktails</Link>
       </Button>
     </div>
@@ -125,6 +130,7 @@ export const Header = () => {
 export const ProductCard = ({
   product,
   translate,
+  scrollYProgress,
 }: {
   product: {
     title: string;
@@ -132,11 +138,19 @@ export const ProductCard = ({
     thumbnail: string;
   };
   translate: MotionValue<number>;
+  scrollYProgress: MotionValue<number>;
 }) => {
+  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
+  const scaleX = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [0.9, 1]),
+    springConfig,
+  );
+
   return (
     <motion.div
       style={{
         x: translate,
+        scaleX,
       }}
       whileHover={{
         y: -20,
