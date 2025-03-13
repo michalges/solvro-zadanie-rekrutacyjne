@@ -43,9 +43,6 @@ export default function Navbar() {
                   <NavigationMenuLink href="/cocktails">
                     Browse All
                   </NavigationMenuLink>
-                  <NavigationMenuLink href="/favorites">
-                    Favorites
-                  </NavigationMenuLink>
                   <NavigationMenuLink href="/ingredients">
                     Ingredients
                   </NavigationMenuLink>

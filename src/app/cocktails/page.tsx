@@ -107,9 +107,13 @@ export default function Page() {
         </div>
       </div>
       <div className="container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredCocktails.map((cocktail: Cocktail) => (
-          <Card key={cocktail.id} cocktail={cocktail} />
-        ))}
+        {filteredCocktails.length > 0 ? (
+          filteredCocktails.map((cocktail: Cocktail) => (
+            <Card key={cocktail.id} cocktail={cocktail} />
+          ))
+        ) : (
+          <p className="text-sm">No cocktails found</p>
+        )}
       </div>
     </div>
   );
