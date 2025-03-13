@@ -8,14 +8,14 @@ export default function Navbar() {
   return (
     <nav className="flex justify-center border-b-2 border-gray-200">
       <div className="container flex w-full items-center justify-between">
-        <Link href="/" className="p-4" passHref>
+        {/* <Link href="/" className="p-4" passHref>
           <Image
             src="/placeholder.png"
             width={128}
             height={128}
             alt="Picture of the author"
           />
-        </Link>
+        </Link> */}
 
         <div className="flex space-x-4 p-4">
           <Link href="/" passHref>
