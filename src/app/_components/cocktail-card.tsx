@@ -1,6 +1,7 @@
 "use client";
 
 import { Heart } from "lucide-react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 import { Cocktail } from "@/app/types";
@@ -54,9 +55,11 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
       </CardHeader>
       <div className="grow"></div>
       <CardContent>
-        <img
+        <Image
           src={cocktail.imageUrl}
           alt={cocktail.name}
+          width={500}
+          height={500}
           className="rounded-2xl"
         />
       </CardContent>
@@ -88,10 +91,12 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
                   </div>
                 </div>
               </DrawerHeader>
-              <img
+              <Image
                 src={cocktail.imageUrl}
                 alt={cocktail.name}
                 className="rounded-2xl md:w-1/3"
+                width={500}
+                height={500}
               />
             </div>
             <DrawerFooter className="">
