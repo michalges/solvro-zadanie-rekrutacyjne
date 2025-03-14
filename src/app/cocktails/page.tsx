@@ -130,7 +130,7 @@ export default function Page() {
               <div key={index} className="space-y-4 px-4 py-6">
                 <Skeleton className="h-6 w-1/3 rounded-md" />
                 <Skeleton className="h-12 w-full rounded-md" />
-                <Skeleton className="mt-8 h-72 w-full rounded-md" />
+                <Skeleton className="mt-8 h-96 w-full rounded-md" />
               </div>
             ))}
           </>

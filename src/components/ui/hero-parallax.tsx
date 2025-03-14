@@ -12,14 +12,17 @@ import Link from "next/link";
 import React from "react";
 
 import { InteractiveHoverButton } from "../magicui/interactive-hover-button";
+import { Skeleton } from "./skeleton";
 
 export const HeroParallax = ({
   products,
+  loading,
 }: {
   products: {
     title: string;
     thumbnail: string;
   }[];
+  loading: boolean;
 }) => {
   const firstRow = products.slice(0, 7);
   const secondRow = products.slice(7, 14);
@@ -48,22 +51,44 @@ export const HeroParallax = ({
       <Header />
       <motion.div>
         <motion.div className="mb-5 flex flex-row space-x-5">
-          {firstRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateX}
-              key={product.title}
-            />
-          ))}
+          {loading ? (
+            <>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className="group/product relative h-96 w-72 shrink-0"
+                />
+              ))}
+            </>
+          ) : (
+            firstRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateX}
+                key={product.title}
+              />
+            ))
+          )}
         </motion.div>
         <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
-          {secondRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateXReverse}
-              key={product.title}
-            />
-          ))}
+          {loading ? (
+            <>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className="group/product relative h-96 w-72 shrink-0"
+                />
+              ))}
+            </>
+          ) : (
+            secondRow.map((product) => (
+              <ProductCard
+                product={product}
+                translate={translateXReverse}
+                key={product.title}
+              />
+            ))
+          )}
         </motion.div>
       </motion.div>
     </div>

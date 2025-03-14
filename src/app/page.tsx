@@ -7,6 +7,7 @@ import { HeroParallax } from "@/components/ui/hero-parallax";
 import { Cocktail } from "./types";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [cocktails, setCocktails] = useState([]);
 
   useEffect(() => {
@@ -20,10 +21,15 @@ export default function Home() {
         thumbnail: cocktail.imageUrl,
       }));
       setCocktails(mappedCocktails);
+      setLoading(false);
     }
 
     fetchCocktails();
   }, []);
 
-  return <HeroParallax products={cocktails} />;
+  return loading ? (
+    <HeroParallax products={cocktails} loading={true} />
+  ) : (
+    <HeroParallax products={cocktails} loading={false} />
+  );
 }
