@@ -30,8 +30,19 @@ export default function Page() {
     const fetchCocktails = async () => {
       const data = await fetch("https://cocktails.solvro.pl/api/v1/cocktails");
       const result = await data.json();
-      setCocktails(result.data);
-
+      const cocktailsWithIngredients = await Promise.all(
+        result.data.map(async (cocktail: Cocktail) => {
+          const ingredientData = await fetch(
+            `https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`,
+          );
+          const ingredientResult = await ingredientData.json();
+          return {
+            ...cocktail,
+            ingredients: ingredientResult.data.ingredients,
+          };
+        }),
+      );
+      setCocktails(cocktailsWithIngredients);
       setLoading(false);
     };
 

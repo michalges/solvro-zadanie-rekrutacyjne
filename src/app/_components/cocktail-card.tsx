@@ -26,28 +26,11 @@ import {
 } from "@/components/ui/drawer";
 
 const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
-  const [ingredients, setIngredients] = useState<string[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     setIsFavorite(favorites.includes(cocktail.id));
-  }, [cocktail.id]);
-
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      try {
-        const response = await fetch(
-          `https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`,
-        );
-        const data = await response.json();
-        setIngredients(data.ingredients);
-      } catch (error) {
-        console.error("Error fetching ingredients:", error);
-      }
-    };
-
-    fetchIngredients();
   }, [cocktail.id]);
 
   const handleFavorite = () => {
@@ -92,8 +75,18 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
                     {cocktail.alcoholic ? "Alcoholic" : "Non-alcoholic"}
                   </Badge>
                 </div>
-
                 <DrawerDescription>{cocktail.instructions}</DrawerDescription>
+                <div className="py-2">
+                  <h3 className="text-md font-medium">Ingredients</h3>
+                  <div className="">
+                    {cocktail.ingredients.map((ingredient, index) => (
+                      <p key={index} className="text-sm">
+                        <span>{ingredient.measure}</span>
+                        <span>{ingredient.name}</span>
+                      </p>
+                    ))}
+                  </div>
+                </div>
               </DrawerHeader>
               <img
                 src={cocktail.imageUrl}
