@@ -139,7 +139,12 @@ export default function Page() {
           ? filteredCocktails.map((cocktail: Cocktail) => (
               <Card key={cocktail.id} cocktail={cocktail} />
             ))
-          : !loading && <p className="text-sm">No cocktails found</p>}
+          : !loading && (
+              <p className="w-full text-xs">
+                No cocktails found.<br></br>Please check your spelling or try
+                different keywords.
+              </p>
+            )}
       </div>
     </div>
   );

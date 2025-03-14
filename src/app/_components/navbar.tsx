@@ -39,12 +39,12 @@ export default function Navbar() {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Cocktails</NavigationMenuTrigger>
-                <NavigationMenuContent className="min-w-36">
+                <NavigationMenuContent className="min-w-48">
                   <NavigationMenuLink href="/cocktails">
                     Browse All
                   </NavigationMenuLink>
                   <NavigationMenuLink href="/ingredients">
-                    Ingredients
+                    Ingridient database
                   </NavigationMenuLink>
                 </NavigationMenuContent>
               </NavigationMenuItem>
