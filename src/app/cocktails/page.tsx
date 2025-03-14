@@ -57,7 +57,7 @@ export default function Page() {
               <Filter />
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="w-80">
             <DialogHeader>
               <DialogTitle>Filters</DialogTitle>
               <DialogDescription></DialogDescription>
