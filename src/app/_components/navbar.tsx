@@ -16,7 +16,7 @@ import { ModeToggle } from "./mode-toggle";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-center border-b px-4">
+    <nav className="bg-background sticky top-0 z-50 flex w-full justify-center border-b px-4">
       <div className="container flex w-full items-center py-4">
         <div className="flex w-full items-center space-x-4">
           <Link href="/" className="" passHref>
