@@ -72,8 +72,8 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="mx-auto w-full space-y-8 px-4 py-16 opacity-90 md:max-w-3xl md:py-36 xl:max-w-6xl">
-      <h1 className="text-2xl font-bold md:text-7xl dark:text-white">
+    <header className="mx-auto w-full space-y-8 px-4 py-16 opacity-90 md:max-w-3xl md:py-36 xl:max-w-6xl">
+      <h1 className="text-4xl font-bold whitespace-nowrap md:text-7xl dark:text-white">
         Solvro cocktails
       </h1>
       <p className="mt-8 max-w-2xl text-base md:text-xl dark:text-neutral-200">
@@ -85,7 +85,7 @@ export const Header = () => {
       <InteractiveHoverButton>
         <Link href="/cocktails">Browse cocktails</Link>
       </InteractiveHoverButton>
-    </div>
+    </header>
   );
 };
 

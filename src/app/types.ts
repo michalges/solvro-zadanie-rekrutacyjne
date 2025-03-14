@@ -1,15 +1,3 @@
-export interface Cocktail {
-  id: string;
-  name: string;
-  category: string;
-  glass: string;
-  instructions: string;
-  imageUrl: string;
-  alcoholic: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface Ingredient {
   id: number;
   name: string;
@@ -20,4 +8,17 @@ export interface Ingredient {
   imageUrl: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Cocktail {
+  id: number;
+  name: string;
+  category: string;
+  glass: string;
+  instructions: string;
+  imageUrl: string;
+  alcoholic: boolean;
+  createdAt: string;
+  updatedAt: string;
+  ingredients: (Ingredient & { measure: string })[];
 }

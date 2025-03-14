@@ -14,8 +14,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
-import Card from "../_components/card";
+import Card from "../_components/cocktail-card";
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,17 +24,21 @@ export default function Page() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showNonAlcoholic, setShowNonAlcoholic] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchCocktails = async () => {
       const data = await fetch("https://cocktails.solvro.pl/api/v1/cocktails");
       const result = await data.json();
       setCocktails(result.data);
+
+      setLoading(false);
     };
 
     fetchCocktails();
   }, []);
 
-  const isFavorite = (cocktailId: string) => {
+  const isFavorite = (cocktailId: number) => {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     return favorites.includes(cocktailId);
   };
@@ -106,14 +111,24 @@ export default function Page() {
           />
         </div>
       </div>
+
       <div className="container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredCocktails.length > 0 ? (
-          filteredCocktails.map((cocktail: Cocktail) => (
-            <Card key={cocktail.id} cocktail={cocktail} />
-          ))
-        ) : (
-          <p className="text-sm">No cocktails found</p>
+        {loading && (
+          <>
+            {[...Array(8)].map((_, index) => (
+              <div key={index} className="space-y-4 px-4 py-6">
+                <Skeleton className="h-6 w-1/3 rounded-md" />
+                <Skeleton className="h-12 w-full rounded-md" />
+                <Skeleton className="mt-8 h-72 w-full rounded-md" />
+              </div>
+            ))}
+          </>
         )}
+        {filteredCocktails.length > 0
+          ? filteredCocktails.map((cocktail: Cocktail) => (
+              <Card key={cocktail.id} cocktail={cocktail} />
+            ))
+          : !loading && <p className="text-sm">No cocktails found</p>}
       </div>
     </div>
   );

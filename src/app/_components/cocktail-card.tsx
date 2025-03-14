@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/drawer";
 
 const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -33,10 +34,26 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
     setIsFavorite(favorites.includes(cocktail.id));
   }, [cocktail.id]);
 
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const response = await fetch(
+          `https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`,
+        );
+        const data = await response.json();
+        setIngredients(data.ingredients);
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+      }
+    };
+
+    fetchIngredients();
+  }, [cocktail.id]);
+
   const handleFavorite = () => {
     let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     if (favorites.includes(cocktail.id)) {
-      favorites = favorites.filter((id: string) => id !== cocktail.id);
+      favorites = favorites.filter((id: number) => id !== cocktail.id);
     } else {
       favorites.push(cocktail.id);
     }
@@ -48,10 +65,8 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
     <Card className="">
       <CardHeader>
         <CardTitle>{cocktail.name}</CardTitle>
-        <CardDescription>
-          {cocktail.instructions.length > 50
-            ? `${cocktail.instructions.substring(0, 50)}...`
-            : cocktail.instructions}
+        <CardDescription className="line-clamp-2">
+          {cocktail.instructions}
         </CardDescription>
       </CardHeader>
       <div className="grow"></div>
