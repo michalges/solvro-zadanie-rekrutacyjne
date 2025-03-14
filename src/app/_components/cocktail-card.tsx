@@ -104,7 +104,7 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
           </DrawerContent>
         </Drawer>
         <Button className="" onClick={handleFavorite}>
-          <Heart fill={isFavorite ? "#18181b" : "none"} />
+          <Heart fill={isFavorite ? "var(--primary-foreground)" : "none"} />
         </Button>
       </CardFooter>
     </Card>
