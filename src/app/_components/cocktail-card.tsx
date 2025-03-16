@@ -70,16 +70,23 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
           </DrawerTrigger>
           <DrawerContent className="">
             <div className="container flex h-full max-h-full w-full flex-col overflow-auto p-4 md:flex-row-reverse">
-              <DrawerHeader className="md:w-1/3">
-                <DrawerTitle>{cocktail.name}</DrawerTitle>
-                <div className="flex space-x-2">
-                  <Badge>{cocktail.category}</Badge>
-                  <Badge>
-                    {cocktail.alcoholic ? "Alcoholic" : "Non-alcoholic"}
-                  </Badge>
+              <DrawerHeader className="space-y-3 md:w-1/3">
+                <div className="space-y-2">
+                  <DrawerTitle className="text-3xl">
+                    {cocktail.name}
+                  </DrawerTitle>
+                  <div className="flex space-x-2">
+                    <Badge>{cocktail.category}</Badge>
+                    <Badge>
+                      {cocktail.alcoholic ? "Alcoholic" : "Non-alcoholic"}
+                    </Badge>
+                  </div>
                 </div>
-                <DrawerDescription>{cocktail.instructions}</DrawerDescription>
-                <div className="py-2">
+                <div>
+                  <h3 className="text-md font-medium">Instructions</h3>
+                  <p className="text-sm">{cocktail.instructions}</p>
+                </div>
+                <div className="mb-4">
                   <h3 className="text-md font-medium">Ingredients</h3>
                   <div className="">
                     {cocktail.ingredients.map((ingredient, index) => (

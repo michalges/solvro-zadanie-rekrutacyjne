@@ -24,8 +24,8 @@ export const HeroParallax = ({
   }[];
   loading: boolean;
 }) => {
-  const firstRow = products.slice(0, 7);
-  const secondRow = products.slice(7, 14);
+  const firstRow = [...products.slice(0, 7), ...products.slice(0, 7)];
+  const secondRow = [...products.slice(7, 14), ...products.slice(7, 14)];
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -35,21 +35,21 @@ export const HeroParallax = ({
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-100, 200]),
+    useTransform(scrollYProgress, [0, 1], [-350, 200]),
     springConfig,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [100, -200]),
+    useTransform(scrollYProgress, [0, 1], [350, -200]),
     springConfig,
   );
 
   return (
     <div
       ref={ref}
-      className="relative flex flex-col self-auto overflow-hidden antialiased"
+      className="relative flex flex-col self-auto overflow-hidden px-5 antialiased"
     >
       <Header />
-      <motion.div>
+      <motion.div className="w-full">
         <motion.div className="mb-5 flex flex-row space-x-5">
           {loading ? (
             <>
@@ -61,11 +61,11 @@ export const HeroParallax = ({
               ))}
             </>
           ) : (
-            firstRow.map((product) => (
+            firstRow.map((product, index) => (
               <ProductCard
                 product={product}
                 translate={translateX}
-                key={product.title}
+                key={index}
               />
             ))
           )}
@@ -81,11 +81,11 @@ export const HeroParallax = ({
               ))}
             </>
           ) : (
-            secondRow.map((product) => (
+            secondRow.map((product, index) => (
               <ProductCard
                 product={product}
                 translate={translateXReverse}
-                key={product.title}
+                key={index}
               />
             ))
           )}
@@ -133,17 +133,17 @@ export const ProductCard = ({
         y: -10,
       }}
       key={product.title}
-      className="group/product relative h-96 w-72 shrink-0"
+      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl shadow-md md:h-96"
     >
       <Image
         src={product.thumbnail}
         height="600"
         width="600"
-        className="absolute inset-0 h-full w-full rounded-2xl object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-center"
         alt={product.title}
       />
-      <div className="absolute inset-0 h-full w-full rounded-2xl bg-black opacity-0 group-hover/product:opacity-80"></div>
-      <h2 className="absolute bottom-4 left-4 text-sm text-white opacity-0 group-hover/product:opacity-100">
+      <div className="absolute inset-0 h-full w-full rounded-2xl bg-gradient-to-t from-black to-transparent opacity-0 group-hover/product:opacity-80"></div>
+      <h2 className="absolute bottom-4 left-4 text-sm font-semibold text-white opacity-0 group-hover/product:opacity-100">
         {product.title}
       </h2>
     </motion.div>

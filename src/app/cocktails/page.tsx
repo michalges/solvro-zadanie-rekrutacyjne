@@ -66,7 +66,7 @@ export default function Page() {
 
   return (
     <div className="flex w-full flex-col items-center justify-center px-4 pb-4">
-      <div className="container flex w-full flex-row space-x-4 py-8">
+      <div className="container flex w-full flex-row space-x-4 py-4 md:py-8">
         <Dialog>
           <DialogTrigger asChild>
             <Button className="h-12 w-12">
