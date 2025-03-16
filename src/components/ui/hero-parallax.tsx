@@ -32,7 +32,7 @@ export const HeroParallax = ({
     offset: ["start start", "end start"],
   });
 
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
+  const springConfig = { stiffness: 200, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [-350, 200]),
@@ -46,10 +46,10 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="relative flex flex-col self-auto overflow-hidden px-5 antialiased"
+      className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_60%_25%_at_50%_50%,rgba(62,138,255,0.4),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.3),transparent)]"
     >
       <Header />
-      <motion.div className="w-full">
+      <motion.div className="bg-primary-foreground relative w-full border-t-2 pt-5">
         <motion.div className="mb-5 flex flex-row space-x-5">
           {loading ? (
             <>
@@ -90,6 +90,7 @@ export const HeroParallax = ({
             ))
           )}
         </motion.div>
+        {/* <div className="pointer-events-none absolute inset-0 z-10 bg-linear-[90deg,var(--primary-foreground),transparent_10%,transparent_90%,var(--primary-foreground)]" /> */}
       </motion.div>
     </div>
   );
@@ -133,7 +134,7 @@ export const ProductCard = ({
         y: -10,
       }}
       key={product.title}
-      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl shadow-md md:h-96"
+      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl border shadow-xl md:h-96 dark:shadow-white/2"
     >
       <Image
         src={product.thumbnail}
