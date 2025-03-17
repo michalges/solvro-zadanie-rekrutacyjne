@@ -46,7 +46,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_60%_20%_at_50%_50%,rgba(62,138,255,0.3),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.3),transparent)]"
+      className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_50%_20%_at_50%_55%,rgba(62,138,255,0.2),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.3),transparent)]"
     >
       <Header />
       <motion.div className="bg-primary-foreground relative w-full border-t-2 pt-5">
@@ -134,7 +134,7 @@ export const ProductCard = ({
         y: -10,
       }}
       key={product.title}
-      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl border shadow-xl md:h-96 dark:shadow-white/2"
+      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl border shadow-md md:h-96 dark:shadow-white/2"
     >
       <Image
         src={product.thumbnail}

@@ -22,7 +22,7 @@ export default function Navbar() {
           <Link href="/" className="" passHref>
             <div className="relative aspect-square h-10">
               <Image
-                src="/placeholder.png"
+                src="/solvro-logo.png"
                 width={128}
                 height={128}
                 alt="Logo"
