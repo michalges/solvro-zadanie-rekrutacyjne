@@ -23,7 +23,7 @@ export function Navbar() {
                 src="/solvro-logo.png"
                 width={128}
                 height={128}
-                alt="Logo"
+                alt="Solvro cocktails - logo"
                 className=""
               />
             </div>
