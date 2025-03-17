@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  MotionValue,
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
+import type { MotionValue } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +9,7 @@ import React from "react";
 import { InteractiveHoverButton } from "../magicui/interactive-hover-button";
 import { Skeleton } from "./skeleton";
 
-export const HeroParallax = ({
+export function HeroParallax({
   products,
   loading,
 }: {
@@ -23,7 +18,7 @@ export const HeroParallax = ({
     thumbnail: string;
   }[];
   loading: boolean;
-}) => {
+}) {
   const firstRow = [...products.slice(0, 7), ...products.slice(0, 7)];
   const secondRow = [...products.slice(7, 14), ...products.slice(7, 14)];
   const ref = React.useRef(null);
@@ -53,19 +48,19 @@ export const HeroParallax = ({
         <motion.div className="mb-5 flex flex-row space-x-5">
           {loading ? (
             <>
-              {Array.from({ length: 10 }).map((_, index) => (
+              {Array.from({ length: 10 }).map(() => (
                 <Skeleton
-                  key={index}
+                  key={crypto.randomUUID()}
                   className="group/product relative h-96 w-72 shrink-0"
                 />
               ))}
             </>
           ) : (
-            firstRow.map((product, index) => (
+            firstRow.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateX}
-                key={index}
+                key={crypto.randomUUID()}
               />
             ))
           )}
@@ -73,19 +68,19 @@ export const HeroParallax = ({
         <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
           {loading ? (
             <>
-              {Array.from({ length: 10 }).map((_, index) => (
+              {Array.from({ length: 10 }).map(() => (
                 <Skeleton
-                  key={index}
+                  key={crypto.randomUUID()}
                   className="group/product relative h-96 w-72 shrink-0"
                 />
               ))}
             </>
           ) : (
-            secondRow.map((product, index) => (
+            secondRow.map((product) => (
               <ProductCard
                 product={product}
                 translate={translateXReverse}
-                key={index}
+                key={crypto.randomUUID()}
               />
             ))
           )}
@@ -94,9 +89,9 @@ export const HeroParallax = ({
       </motion.div>
     </div>
   );
-};
+}
 
-export const Header = () => {
+export function Header() {
   return (
     <header className="mx-auto w-full space-y-8 px-4 py-16 opacity-90 md:max-w-3xl md:py-36 xl:max-w-6xl">
       <h1 className="text-4xl font-bold whitespace-nowrap md:text-7xl dark:text-white">
@@ -104,18 +99,18 @@ export const Header = () => {
       </h1>
       <p className="mt-8 max-w-2xl text-base md:text-xl dark:text-neutral-200">
         Discover a variety of delicious cocktails crafted to perfection. Whether
-        you're looking for a classic drink or something new, our collection has
-        something for everyone. Explore our recipes and find your next favorite
-        cocktail.
+        you&apos;re looking for a classic drink or something new, our collection
+        has something for everyone. Explore our recipes and find your next
+        favorite cocktail.
       </p>
       <InteractiveHoverButton>
         <Link href="/cocktails">Browse cocktails</Link>
       </InteractiveHoverButton>
     </header>
   );
-};
+}
 
-export const ProductCard = ({
+export function ProductCard({
   product,
   translate,
 }: {
@@ -124,7 +119,7 @@ export const ProductCard = ({
     thumbnail: string;
   };
   translate: MotionValue<number>;
-}) => {
+}) {
   return (
     <motion.div
       style={{
@@ -149,4 +144,4 @@ export const ProductCard = ({
       </h2>
     </motion.div>
   );
-};
+}

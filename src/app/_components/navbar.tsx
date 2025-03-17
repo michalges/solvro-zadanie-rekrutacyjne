@@ -4,17 +4,15 @@ import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
 import { ModeToggle } from "./mode-toggle";
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <nav className="bg-background sticky top-0 z-50 flex w-full justify-center border-b px-4">
       <div className="container flex w-full items-center py-4">

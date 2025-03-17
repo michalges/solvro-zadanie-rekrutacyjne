@@ -1,10 +1,8 @@
-import Image from "next/image";
-
-import { Ingredient } from "@/app/types";
+// import Image from "next/image";
+import type { Ingredient } from "@/app/types";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -13,7 +11,7 @@ import {
 
 export default async function Page() {
   const data = await fetch("https://cocktails.solvro.pl/api/v1/ingredients");
-  const ingredients = await data.json();
+  const ingredients = (await data.json()) as { data: Ingredient[] };
 
   return (
     <div className="justify flex">
@@ -31,7 +29,7 @@ export default async function Page() {
               <TableRow key={ingredient.id}>
                 <TableCell>{ingredient.name}</TableCell>
                 <TableCell className="flex h-24 w-24 items-center justify-center">
-                  {ingredient.imageUrl ? (
+                  {/* {ingredient.imageUrl && ingredient.imageUrl.trim() ? (
                     <Image
                       src={ingredient.imageUrl}
                       alt={ingredient.name}
@@ -41,10 +39,10 @@ export default async function Page() {
                     />
                   ) : (
                     "-"
-                  )}
+                  )} */}
                 </TableCell>
                 <TableCell className="whitespace-normal">
-                  {ingredient.description ? ingredient.description : "-"}
+                  {/* {ingredient.description ? ingredient.description : "-"} */}
                 </TableCell>
               </TableRow>
             ))}

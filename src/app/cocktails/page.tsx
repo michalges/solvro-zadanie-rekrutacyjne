@@ -3,7 +3,7 @@
 import { Filter, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { Cocktail } from "@/app/types";
+import type { Cocktail, Ingredient } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -16,7 +16,14 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import Card from "../_components/cocktail-card";
+import { CocktailCard } from "../_components/cocktail-card";
+
+const isFavorite = (cocktailId: number) => {
+  const favorites: number[] = JSON.parse(
+    localStorage.getItem("favorites") ?? "[]",
+  ) as number[];
+  return favorites.includes(cocktailId);
+};
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,13 +36,15 @@ export default function Page() {
   useEffect(() => {
     const fetchCocktails = async () => {
       const data = await fetch("https://cocktails.solvro.pl/api/v1/cocktails");
-      const result = await data.json();
+      const result = (await data.json()) as { data: Cocktail[] };
       const cocktailsWithIngredients = await Promise.all(
         result.data.map(async (cocktail: Cocktail) => {
           const ingredientData = await fetch(
-            `https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id}`,
+            `https://cocktails.solvro.pl/api/v1/cocktails/${cocktail.id.toString()}`,
           );
-          const ingredientResult = await ingredientData.json();
+          const ingredientResult = (await ingredientData.json()) as {
+            data: { ingredients: (Ingredient & { measure: string })[] };
+          };
           return {
             ...cocktail,
             ingredients: ingredientResult.data.ingredients,
@@ -46,13 +55,10 @@ export default function Page() {
       setLoading(false);
     };
 
-    fetchCocktails();
+    fetchCocktails().catch((error: unknown) => {
+      console.error("Failed to fetch cocktails:", error);
+    });
   }, []);
-
-  const isFavorite = (cocktailId: number) => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    return favorites.includes(cocktailId);
-  };
 
   const filteredCocktails = cocktails.filter((cocktail: Cocktail) => {
     const matchesSearchQuery = cocktail.name
@@ -81,9 +87,9 @@ export default function Page() {
                 <Checkbox
                   id="favorites"
                   checked={showFavorites}
-                  onCheckedChange={(checked) =>
-                    setShowFavorites(checked === true)
-                  }
+                  onCheckedChange={(checked) => {
+                    setShowFavorites(checked === true);
+                  }}
                 />
                 <label
                   htmlFor="favorites"
@@ -96,9 +102,9 @@ export default function Page() {
                 <Checkbox
                   id="non-alcoholic"
                   checked={showNonAlcoholic}
-                  onCheckedChange={(checked) =>
-                    setShowNonAlcoholic(checked === true)
-                  }
+                  onCheckedChange={(checked) => {
+                    setShowNonAlcoholic(checked === true);
+                  }}
                 />
                 <label
                   htmlFor="non-alcoholic"
@@ -117,27 +123,29 @@ export default function Page() {
             type="text"
             placeholder="Search for a cocktail..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(event) => {
+              setSearchQuery(event.target.value);
+            }}
             className="h-full w-full outline-none"
           />
         </div>
       </div>
 
       <div className="container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {loading && (
+        {loading ? (
           <>
-            {[...Array(8)].map((_, index) => (
-              <div key={index} className="space-y-4 px-4 py-6">
+            {Array.from({ length: 8 }).map(() => (
+              <div key={crypto.randomUUID()} className="space-y-4 px-4 py-6">
                 <Skeleton className="h-6 w-1/3 rounded-md" />
                 <Skeleton className="h-12 w-full rounded-md" />
                 <Skeleton className="mt-8 h-96 w-full rounded-md" />
               </div>
             ))}
           </>
-        )}
+        ) : null}
         {filteredCocktails.length > 0
           ? filteredCocktails.map((cocktail: Cocktail) => (
-              <Card key={cocktail.id} cocktail={cocktail} />
+              <CocktailCard key={cocktail.id} cocktail={cocktail} />
             ))
           : !loading && (
               <p className="w-full text-xs">

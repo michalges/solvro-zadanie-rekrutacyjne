@@ -4,7 +4,7 @@ import { Heart } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-import { Cocktail } from "@/app/types";
+import type { Cocktail } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,23 +19,26 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
+export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const favorites: number[] = JSON.parse(
+      localStorage.getItem("favorites") ?? "[]",
+    ) as number[];
     setIsFavorite(favorites.includes(cocktail.id));
   }, [cocktail.id]);
 
   const handleFavorite = () => {
-    let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    let favorites: number[] = JSON.parse(
+      localStorage.getItem("favorites") ?? "[]",
+    ) as number[];
     if (favorites.includes(cocktail.id)) {
       favorites = favorites.filter((id: number) => id !== cocktail.id);
     } else {
@@ -89,8 +92,8 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
                 <div className="mb-4">
                   <h3 className="text-md font-medium">Ingredients</h3>
                   <div className="">
-                    {cocktail.ingredients.map((ingredient, index) => (
-                      <p key={index} className="text-sm">
+                    {cocktail.ingredients.map((ingredient) => (
+                      <p key={ingredient.name} className="text-sm">
                         <span>{ingredient.measure}</span>
                         <span>{ingredient.name}</span>
                       </p>
@@ -121,6 +124,4 @@ const CocktailCard: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
       </CardFooter>
     </Card>
   );
-};
-
-export default CocktailCard;
+}
