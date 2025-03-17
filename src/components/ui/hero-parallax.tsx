@@ -46,7 +46,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_60%_25%_at_50%_50%,rgba(62,138,255,0.4),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.3),transparent)]"
+      className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_50%_25%_at_50%_60%,rgba(62,138,255,0.4),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.3),transparent)]"
     >
       <Header />
       <motion.div className="bg-primary-foreground relative w-full border-t-2 pt-5">
