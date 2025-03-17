@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { CocktailCard } from "../_components/cocktail-card";
+import { CocktailCard } from "./_components/cocktail-card";
 
 const isFavorite = (cocktailId: number) => {
   const favorites: number[] = JSON.parse(

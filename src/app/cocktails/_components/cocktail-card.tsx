@@ -72,8 +72,8 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
             <Button variant="outline">Details</Button>
           </DrawerTrigger>
           <DrawerContent className="">
-            <div className="container flex h-full max-h-full w-full flex-col overflow-auto p-4 md:flex-row-reverse">
-              <DrawerHeader className="space-y-3 md:w-1/3">
+            <div className="flex h-full max-h-full flex-col items-center overflow-auto p-4 xl:flex-row-reverse xl:items-start xl:justify-center">
+              <DrawerHeader className="space-y-3 xl:w-1/3">
                 <div className="space-y-2">
                   <DrawerTitle className="text-3xl">
                     {cocktail.name}
@@ -104,7 +104,7 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
               <Image
                 src={cocktail.imageUrl}
                 alt={cocktail.name}
-                className="rounded-2xl md:w-1/3"
+                className="rounded-2xl xl:w-1/3"
                 width={500}
                 height={500}
               />
