@@ -1,5 +1,4 @@
 // import Image from "next/image";
-import type { Ingredient } from "@/app/types";
 import {
   Table,
   TableBody,
@@ -8,6 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+import type { Ingredient } from "../types/types";
 
 export default async function Page() {
   const data = await fetch("https://cocktails.solvro.pl/api/v1/ingredients");
