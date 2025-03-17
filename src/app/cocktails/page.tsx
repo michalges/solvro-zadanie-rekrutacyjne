@@ -3,7 +3,6 @@
 import { Filter, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import type { Cocktail, Ingredient } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import type { Cocktail, Ingredient } from "../types/types";
 import { CocktailCard } from "./_components/cocktail-card";
 
 const isFavorite = (cocktailId: number) => {

@@ -4,7 +4,6 @@ import { Heart } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-import type { Cocktail } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +23,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+
+import type { Cocktail } from "../../types/types";
 
 export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
   const [isFavorite, setIsFavorite] = useState(false);

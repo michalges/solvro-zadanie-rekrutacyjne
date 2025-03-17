@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { HeroParallax } from "@/components/ui/hero-parallax";
 
-import type { Cocktail } from "./types";
+import type { Cocktail } from "./types/types";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
