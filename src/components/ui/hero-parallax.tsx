@@ -50,7 +50,7 @@ export function HeroParallax({
             <>
               {Array.from({ length: 10 }).map(() => (
                 <Skeleton
-                  key={crypto.randomUUID()}
+                  key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
                   className="group/product relative h-96 w-72 shrink-0"
                 />
               ))}
@@ -60,7 +60,7 @@ export function HeroParallax({
               <ProductCard
                 product={product}
                 translate={translateX}
-                key={crypto.randomUUID()}
+                key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
               />
             ))
           )}
@@ -70,7 +70,7 @@ export function HeroParallax({
             <>
               {Array.from({ length: 10 }).map(() => (
                 <Skeleton
-                  key={crypto.randomUUID()}
+                  key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
                   className="group/product relative h-96 w-72 shrink-0"
                 />
               ))}
@@ -80,7 +80,7 @@ export function HeroParallax({
               <ProductCard
                 product={product}
                 translate={translateXReverse}
-                key={crypto.randomUUID()}
+                key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
               />
             ))
           )}

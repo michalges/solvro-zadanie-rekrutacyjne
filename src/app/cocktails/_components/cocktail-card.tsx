@@ -63,8 +63,8 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
         <Image
           src={cocktail.imageUrl}
           alt={cocktail.name}
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           className="rounded-2xl"
         />
       </CardContent>
@@ -74,7 +74,7 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
             <Button variant="outline">Details</Button>
           </DrawerTrigger>
           <DrawerContent className="">
-            <div className="flex h-full max-h-full flex-col items-center overflow-auto p-4 xl:flex-row-reverse xl:items-start xl:justify-center">
+            <div className="flex h-full max-h-full flex-col overflow-auto p-4 xl:flex-row-reverse xl:justify-center">
               <DrawerHeader className="space-y-4 xl:w-1/3">
                 <div className="space-y-2">
                   <DrawerTitle className="text-3xl">
@@ -104,13 +104,15 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
                 </div>
               </DrawerHeader>
               <DrawerDescription></DrawerDescription>
-              <Image
-                src={cocktail.imageUrl}
-                alt={cocktail.name}
-                className="rounded-2xl shadow-md xl:w-1/3"
-                width={500}
-                height={500}
-              />
+              <div className="p-4 shadow-md xl:aspect-square xl:w-1/3">
+                <Image
+                  src={cocktail.imageUrl}
+                  alt={cocktail.name}
+                  className="h-full w-full rounded-2xl border"
+                  width={500}
+                  height={500}
+                />
+              </div>
             </div>
             <DrawerFooter className="">
               <DrawerClose asChild>

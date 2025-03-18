@@ -75,7 +75,7 @@ export default function Page() {
       <div className="container flex w-full flex-row space-x-4 py-4 md:py-8">
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="h-12 w-12">
+            <Button className="aspect-square h-11 sm:h-12">
               <Filter />
             </Button>
           </DialogTrigger>
@@ -117,7 +117,7 @@ export default function Page() {
           </DialogContent>
         </Dialog>
 
-        <div className="flex h-12 w-full flex-row items-center rounded-md border">
+        <div className="flex h-11 w-full flex-row items-center rounded-md border sm:h-12">
           <Search color="#848484" className="h-full w-11 p-3" />
           <input
             type="text"
@@ -135,7 +135,10 @@ export default function Page() {
         {loading ? (
           <>
             {Array.from({ length: 8 }).map(() => (
-              <div key={crypto.randomUUID()} className="space-y-4 px-4 py-6">
+              <div
+                key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+                className="space-y-4 px-4 py-6"
+              >
                 <Skeleton className="h-6 w-1/3 rounded-md" />
                 <Skeleton className="h-12 w-full rounded-md" />
                 <Skeleton className="mt-8 h-96 w-full rounded-md" />

@@ -15,7 +15,7 @@ import { ModeToggle } from "./mode-toggle";
 export function Navbar() {
   return (
     <nav className="bg-background/95 sticky top-0 z-50 flex w-full justify-center border-b px-4 backdrop-blur-sm backdrop-filter">
-      <div className="container flex w-full items-center py-4">
+      <div className="container flex w-full items-center py-3 sm:py-4">
         <div className="flex w-full items-center space-x-4">
           <Link href="/" className="" passHref>
             <div className="relative aspect-square h-10">
@@ -23,7 +23,7 @@ export function Navbar() {
                 src="/solvro-logo.png"
                 width={128}
                 height={128}
-                alt="Solvro cocktails - logo"
+                alt="Solvro cocktails logo - homepage"
                 className=""
               />
             </div>
