@@ -118,7 +118,7 @@ export default function Page() {
         </Dialog>
 
         <div className="flex h-12 w-full flex-row items-center rounded-md border">
-          <Search color="#848484" className="h-full w-12 p-3" />
+          <Search color="#848484" className="h-full w-11 p-3" />
           <input
             type="text"
             placeholder="Search for a cocktail..."
