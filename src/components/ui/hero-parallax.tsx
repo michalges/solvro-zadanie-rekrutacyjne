@@ -19,22 +19,68 @@ export function HeroParallax({
   }[];
   loading: boolean;
 }) {
-  const firstRow = [...products.slice(0, 7), ...products.slice(0, 7)];
-  const secondRow = [...products.slice(7, 14), ...products.slice(7, 14)];
+  const row = products.slice(0, 3);
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
   const springConfig = { stiffness: 200, damping: 30, bounce: 100 };
+  const [vw, setVw] = React.useState(0);
+  const [vh, setVh] = React.useState(0);
 
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-100, 100]),
+  React.useEffect(() => {
+    setVw(window.innerWidth);
+    setVh(window.innerHeight);
+
+    const handleResize = () => {
+      setVw(window.innerWidth);
+      setVh(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const translateX1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0.1 * vw, 0]),
     springConfig,
   );
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [100, -100]),
+  const translateX2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, 0]),
+    springConfig,
+  );
+  const translateX3 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-0.1 * vw, 0]),
+    springConfig,
+  );
+
+  const translateY1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-0.3 * vh, 0]),
+    springConfig,
+  );
+  const translateY2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-0.5 * vh, 0]),
+    springConfig,
+  );
+  const translateY3 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-0.2 * vh, 0]),
+    springConfig,
+  );
+
+  const scale1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    springConfig,
+  );
+  const scale2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    springConfig,
+  );
+  const scale3 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
     springConfig,
   );
 
@@ -44,48 +90,41 @@ export function HeroParallax({
       className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_50%_20%_at_50%_55%,rgba(62,138,255,0.2),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.25),transparent)]"
     >
       <Header />
-      <motion.div className="bg-primary-foreground relative w-full border-t-2 pt-5">
-        <motion.div className="mb-5 flex flex-row space-x-5">
-          {loading ? (
-            <>
-              {Array.from({ length: 10 }).map(() => (
-                <Skeleton
-                  key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
-                  className="group/product relative h-96 w-72 shrink-0"
-                />
-              ))}
-            </>
-          ) : (
-            firstRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateX}
+      <motion.div className="bg-primary-foreground relative flex h-screen w-full items-center justify-center space-x-4 border-t-2 p-4">
+        {loading ? (
+          <>
+            {Array.from({ length: 10 }).map(() => (
+              <Skeleton
                 key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+                className="group/product relative h-96 w-72 shrink-0"
               />
-            ))
-          )}
-        </motion.div>
-        <motion.div className="mb-5 flex flex-row-reverse space-x-5 space-x-reverse">
-          {loading ? (
-            <>
-              {Array.from({ length: 10 }).map(() => (
-                <Skeleton
-                  key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
-                  className="group/product relative h-96 w-72 shrink-0"
-                />
-              ))}
-            </>
-          ) : (
-            secondRow.map((product) => (
-              <ProductCard
-                product={product}
-                translate={translateXReverse}
-                key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
-              />
-            ))
-          )}
-        </motion.div>
-        {/* <div className="pointer-events-none absolute inset-0 z-10 bg-linear-[90deg,var(--primary-foreground),transparent_10%,transparent_90%,var(--primary-foreground)]" /> */}
+            ))}
+          </>
+        ) : (
+          <>
+            <ProductCard
+              product={row[0]}
+              translateX={translateX1}
+              translateY={translateY1}
+              scale={scale1}
+              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+            />
+            <ProductCard
+              product={row[1]}
+              translateX={translateX2}
+              translateY={translateY2}
+              scale={scale2}
+              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+            />
+            <ProductCard
+              product={row[2]}
+              translateX={translateX3}
+              translateY={translateY3}
+              scale={scale3}
+              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+            />
+          </>
+        )}
       </motion.div>
     </div>
   );
@@ -93,7 +132,7 @@ export function HeroParallax({
 
 export function Header() {
   return (
-    <header className="mx-auto w-full space-y-8 px-4 py-16 opacity-90 md:max-w-3xl md:py-36 xl:max-w-6xl">
+    <header className="mx-auto w-full space-y-8 px-4 pt-16 pb-32 opacity-90 md:max-w-3xl md:pt-36 md:pb-54 xl:max-w-6xl">
       <h1 className="text-4xl font-bold whitespace-nowrap md:text-7xl dark:text-white">
         Solvro cocktails
       </h1>
@@ -112,24 +151,27 @@ export function Header() {
 
 export function ProductCard({
   product,
-  translate,
+  translateX,
+  translateY,
+  scale,
 }: {
   product: {
     title: string;
     thumbnail: string;
   };
-  translate: MotionValue<number>;
+  translateX: MotionValue<number>;
+  translateY: MotionValue<number>;
+  scale: MotionValue<number>;
 }) {
   return (
     <motion.div
       style={{
-        x: translate,
-      }}
-      whileHover={{
-        y: -10,
+        x: translateX,
+        y: translateY,
+        scale,
       }}
       key={product.title}
-      className="group/product relative aspect-[3/4] h-64 shrink-0 overflow-hidden rounded-2xl border shadow-md md:h-96 dark:shadow-white/2"
+      className="group/product relative aspect-square w-1/3 overflow-hidden rounded-2xl border shadow-md dark:shadow-white/2"
     >
       <Image
         src={product.thumbnail}
