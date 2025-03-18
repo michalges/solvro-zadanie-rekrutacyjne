@@ -29,24 +29,24 @@ export function HeroParallax({
   const springConfig = { stiffness: 200, damping: 30, bounce: 100 };
   const [vw, setVw] = React.useState(0);
   const [vh, setVh] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
-    setVw(window.innerWidth);
-    setVh(window.innerHeight);
-
-    const handleResize = () => {
+    const updateDimensions = () => {
       setVw(window.innerWidth);
       setVh(window.innerHeight);
+      setIsMobile(window.innerWidth <= 1024); // Adjust the breakpoint as needed
     };
 
-    window.addEventListener("resize", handleResize);
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", updateDimensions);
     };
   }, []);
 
   const translateX1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0.1 * vw, 0]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0.1 * vw, 0]),
     springConfig,
   );
   const translateX2 = useSpring(
@@ -54,33 +54,33 @@ export function HeroParallax({
     springConfig,
   );
   const translateX3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-0.1 * vw, 0]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-0.1 * vw, 0]),
     springConfig,
   );
 
   const translateY1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-0.3 * vh, 0]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-0.3 * vh, 0]),
     springConfig,
   );
   const translateY2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-0.5 * vh, 0]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-0.4 * vh, 0]),
     springConfig,
   );
   const translateY3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-0.2 * vh, 0]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-0.3 * vh, 0]),
     springConfig,
   );
 
   const scale1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
     springConfig,
   );
   const scale2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
     springConfig,
   );
   const scale3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
     springConfig,
   );
 
@@ -90,10 +90,10 @@ export function HeroParallax({
       className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_50%_20%_at_50%_55%,rgba(62,138,255,0.2),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.25),transparent)]"
     >
       <Header />
-      <motion.div className="bg-primary-foreground relative flex h-screen w-full items-center justify-center space-x-4 border-t-2 p-4">
+      <motion.div className="bg-primary-foreground relative flex w-full flex-col items-center justify-center space-x-4 border-t-2 p-4 lg:flex-row xl:h-screen">
         {loading ? (
           <>
-            {Array.from({ length: 10 }).map(() => (
+            {Array.from({ length: 3 }).map(() => (
               <Skeleton
                 key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
                 className="group/product relative h-96 w-72 shrink-0"
@@ -171,7 +171,7 @@ export function ProductCard({
         scale,
       }}
       key={product.title}
-      className="group/product relative aspect-square w-1/3 overflow-hidden rounded-2xl border shadow-md dark:shadow-white/2"
+      className="group/product relative aspect-square w-full overflow-hidden rounded-2xl border shadow-md lg:w-1/3 dark:shadow-white/2"
     >
       <Image
         src={product.thumbnail}
