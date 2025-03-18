@@ -30,11 +30,11 @@ export function HeroParallax({
   const springConfig = { stiffness: 200, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-350, 200]),
+    useTransform(scrollYProgress, [0, 1], [-100, 100]),
     springConfig,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [350, -200]),
+    useTransform(scrollYProgress, [0, 1], [100, -100]),
     springConfig,
   );
 
@@ -136,7 +136,7 @@ export function ProductCard({
         height="600"
         width="600"
         className="absolute inset-0 h-full w-full object-cover object-center"
-        alt={product.title}
+        alt=""
       />
       <div className="absolute inset-0 h-full w-full rounded-2xl bg-gradient-to-t from-black to-transparent opacity-0 group-hover/product:opacity-80"></div>
       <h2 className="absolute bottom-4 left-4 text-sm font-semibold text-white opacity-0 group-hover/product:opacity-100">
