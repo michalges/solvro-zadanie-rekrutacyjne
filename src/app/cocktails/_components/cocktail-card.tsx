@@ -74,8 +74,8 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
             <Button variant="outline">Details</Button>
           </DrawerTrigger>
           <DrawerContent className="">
-            <div className="flex h-full max-h-full flex-col overflow-auto p-4 xl:flex-row-reverse xl:justify-center">
-              <DrawerHeader className="space-y-4 xl:w-1/3">
+            <div className="flex h-full max-h-full flex-col overflow-auto p-4 lg:flex-row-reverse lg:justify-center">
+              <DrawerHeader className="space-y-4 lg:w-1/2 xl:w-1/3">
                 <div className="space-y-2">
                   <DrawerTitle className="text-3xl">
                     {cocktail.name}
@@ -104,15 +104,13 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
                 </div>
               </DrawerHeader>
               <DrawerDescription></DrawerDescription>
-              <div className="p-4 shadow-md xl:aspect-square xl:w-1/3">
-                <Image
-                  src={cocktail.imageUrl}
-                  alt={cocktail.name}
-                  className="h-full w-full rounded-2xl border"
-                  width={500}
-                  height={500}
-                />
-              </div>
+              <Image
+                src={cocktail.imageUrl}
+                alt={cocktail.name}
+                className="h-full w-full rounded-2xl border shadow-md lg:aspect-square lg:w-1/2 xl:w-1/3"
+                width={500}
+                height={500}
+              />
             </div>
             <DrawerFooter className="">
               <DrawerClose asChild>
@@ -123,8 +121,11 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-        <Button className="" onClick={handleFavorite}>
-          <Heart fill={isFavorite ? "var(--primary-foreground)" : "none"} />
+        <Button className="group" onClick={handleFavorite}>
+          <Heart
+            className="transition group-hover:scale-90"
+            fill={isFavorite ? "var(--primary-foreground)" : "none"}
+          />
         </Button>
       </CardFooter>
     </Card>

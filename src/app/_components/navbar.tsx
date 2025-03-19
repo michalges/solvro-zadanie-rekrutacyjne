@@ -18,13 +18,13 @@ export function Navbar() {
       <div className="container flex w-full items-center py-3 sm:py-4">
         <div className="flex w-full items-center space-x-4">
           <Link href="/" className="" passHref>
-            <div className="relative aspect-square h-10">
+            <div className="relative flex aspect-square h-8 items-center sm:h-10">
               <Image
-                src="/solvro-logo.png"
+                src="/solvro-logo.svg"
                 width={128}
                 height={128}
                 alt="Solvro cocktails logo - homepage"
-                className=""
+                className="dark:invert"
               />
             </div>
           </Link>

@@ -200,7 +200,7 @@ export function ProductCard({
       />
       <motion.h2
         style={{ opacity }}
-        className="w-full pt-1 text-center text-sm"
+        className="w-full pt-1 text-center text-xs"
       >
         {product.title}
       </motion.h2>
