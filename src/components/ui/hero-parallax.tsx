@@ -35,7 +35,7 @@ export function HeroParallax({
     const updateDimensions = () => {
       setVw(window.innerWidth);
       setVh(window.innerHeight);
-      setIsMobile(window.innerWidth <= 1024); // Adjust the breakpoint as needed
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     updateDimensions();
@@ -72,16 +72,32 @@ export function HeroParallax({
   );
 
   const scale1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0.95, 1] : [0.9, 1]),
     springConfig,
   );
   const scale2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0.95, 1] : [0.9, 1]),
     springConfig,
   );
   const scale3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.9, 1]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [0.95, 1] : [0.9, 1]),
     springConfig,
+  );
+
+  const opacity1 = useTransform(
+    scrollYProgress,
+    [0, 0.9, 1],
+    isMobile ? [1, 1, 1] : [0, 0, 1],
+  );
+  const opacity2 = useTransform(
+    scrollYProgress,
+    [0, 0.95, 1],
+    isMobile ? [1, 1, 1] : [0, 0, 1],
+  );
+  const opacity3 = useTransform(
+    scrollYProgress,
+    [0, 0.95, 1],
+    isMobile ? [1, 1, 1] : [0, 0, 1],
   );
 
   return (
@@ -90,7 +106,7 @@ export function HeroParallax({
       className="relative flex flex-col self-auto overflow-hidden bg-[radial-gradient(ellipse_50%_20%_at_50%_55%,rgba(62,138,255,0.2),transparent)] antialiased dark:bg-[radial-gradient(ellipse_60%_35%_at_50%_50%,rgba(62,138,255,0.25),transparent)]"
     >
       <Header />
-      <motion.div className="bg-primary-foreground relative flex w-full flex-col items-center justify-center space-x-4 border-t-2 p-4 lg:flex-row xl:h-screen">
+      <motion.div className="bg-primary-foreground flex w-full flex-col items-center justify-center space-y-4 border-t-2 p-4 lg:h-screen lg:flex-row lg:space-y-0 lg:space-x-4">
         {loading ? (
           <>
             {Array.from({ length: 3 }).map(() => (
@@ -107,21 +123,21 @@ export function HeroParallax({
               translateX={translateX1}
               translateY={translateY1}
               scale={scale1}
-              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+              opacity={opacity1}
             />
             <ProductCard
               product={row[1]}
               translateX={translateX2}
               translateY={translateY2}
               scale={scale2}
-              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+              opacity={opacity2}
             />
             <ProductCard
               product={row[2]}
               translateX={translateX3}
               translateY={translateY3}
               scale={scale3}
-              key={crypto.getRandomValues(new Uint32Array(1))[0].toString()}
+              opacity={opacity3}
             />
           </>
         )}
@@ -132,7 +148,7 @@ export function HeroParallax({
 
 export function Header() {
   return (
-    <header className="mx-auto w-full space-y-8 px-4 pt-16 pb-32 opacity-90 md:max-w-3xl md:pt-36 md:pb-54 xl:max-w-6xl">
+    <header className="mx-auto w-full space-y-8 px-4 pt-12 pb-16 opacity-90 md:max-w-3xl md:pt-32 md:pb-54 xl:max-w-6xl">
       <h1 className="text-4xl font-bold whitespace-nowrap md:text-7xl dark:text-white">
         Solvro cocktails
       </h1>
@@ -154,6 +170,7 @@ export function ProductCard({
   translateX,
   translateY,
   scale,
+  opacity,
 }: {
   product: {
     title: string;
@@ -162,6 +179,7 @@ export function ProductCard({
   translateX: MotionValue<number>;
   translateY: MotionValue<number>;
   scale: MotionValue<number>;
+  opacity: MotionValue<number>;
 }) {
   return (
     <motion.div
@@ -171,19 +189,21 @@ export function ProductCard({
         scale,
       }}
       key={product.title}
-      className="group/product relative aspect-square w-full overflow-hidden rounded-2xl border shadow-md lg:w-1/3 dark:shadow-white/2"
+      className="group/product relative w-full overflow-hidden lg:w-1/3 dark:shadow-white/2"
     >
       <Image
         src={product.thumbnail}
         height="600"
         width="600"
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="relative inset-0 aspect-square h-full w-full rounded-2xl border object-cover object-center shadow-md"
         alt=""
       />
-      <div className="absolute inset-0 h-full w-full rounded-2xl bg-gradient-to-t from-black to-transparent opacity-0 group-hover/product:opacity-80"></div>
-      <h2 className="absolute bottom-4 left-4 text-sm font-semibold text-white opacity-0 group-hover/product:opacity-100">
+      <motion.h2
+        style={{ opacity }}
+        className="w-full pt-1 text-center text-sm"
+      >
         {product.title}
-      </h2>
+      </motion.h2>
     </motion.div>
   );
 }
