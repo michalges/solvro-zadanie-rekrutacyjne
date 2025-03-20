@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 
 import { ModeToggle } from "./mode-toggle";
 
@@ -28,28 +21,14 @@ export function Navbar() {
               />
             </div>
           </Link>
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/" className="font-medium">
-                  Home
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent">
-                  Cocktails
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="min-w-48">
-                  <NavigationMenuLink href="/cocktails">
-                    Browse All
-                  </NavigationMenuLink>
-                  <NavigationMenuLink href="/ingredients">
-                    Ingridient database
-                  </NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div>
+            <Link href="/" passHref>
+              <Button variant="ghost">Home</Button>
+            </Link>
+            <Link href="/cocktails" passHref>
+              <Button variant="ghost">Cocktails</Button>
+            </Link>
+          </div>
         </div>
         <ModeToggle />
       </div>

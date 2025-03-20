@@ -131,6 +131,12 @@ export default function Page() {
         </div>
       </div>
 
+      {filteredCocktails.length <= 0 && !loading && (
+        <p className="container flex h-32 items-center justify-center text-center text-xs">
+          No cocktails found.<br></br>Please check your spelling or try
+          different keywords.
+        </p>
+      )}
       <div className="container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {loading ? (
           <>
@@ -150,12 +156,7 @@ export default function Page() {
           ? filteredCocktails.map((cocktail: Cocktail) => (
               <CocktailCard key={cocktail.id} cocktail={cocktail} />
             ))
-          : !loading && (
-              <p className="w-full text-xs">
-                No cocktails found.<br></br>Please check your spelling or try
-                different keywords.
-              </p>
-            )}
+          : null}
       </div>
     </div>
   );

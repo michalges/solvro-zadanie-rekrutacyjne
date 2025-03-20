@@ -39,13 +39,13 @@ export function ModeToggle() {
         >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           onClick={() => {
             setTheme("system");
           }}
         >
           System
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
