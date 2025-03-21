@@ -110,7 +110,7 @@ export function HeroParallax({
       <motion.div className="bg-primary-foreground flex w-full flex-col items-center justify-center space-y-4 border-t-2 p-4 lg:h-screen">
         <motion.h2
           style={{ opacity: opacityH2 }}
-          className="text-md mt-4 w-full px-4 text-center font-semibold lg:mt-20 lg:text-2xl"
+          className="text-md mt-4 w-full px-4 text-center font-semibold lg:mt-24 lg:text-2xl"
         >
           Featured Drinks from Our Collection
         </motion.h2>
