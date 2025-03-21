@@ -1,4 +1,4 @@
-# Solvro zadanie rekrutacyjne
+# Solvro - zadanie rekrutacyjne
 
 Strona zrobiona jako zadanie rekrutacyjne do koła naukowego "Solvro" Politechniki Wrocławskiej
 
