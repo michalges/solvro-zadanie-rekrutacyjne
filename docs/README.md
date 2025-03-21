@@ -32,7 +32,7 @@ via: [github.com/Solvro/rekrutacja/](https://github.com/Solvro/rekrutacja/blob/m
   Komórka:\
    ![alt text](assets/moblie_performance.png)
 
-  [PageSpeed Insights](https://pagespeed.web.dev/analysishttps-solvro-zadanie-rekrutacyjne-vercel-app/nnpsrsdmj2?hl=pl&form_factor=desktop)
+  [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-solvro-zadanie-rekrutacyjne-vercel-app/ytfv9vnuxn?hl=pl&form_factor=mobile)
 
 ## Użyte technologie
 
