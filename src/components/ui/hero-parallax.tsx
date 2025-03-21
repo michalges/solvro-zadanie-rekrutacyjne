@@ -209,6 +209,7 @@ export function ProductCard({
     >
       <Image
         src={product.thumbnail}
+        priority={true}
         height="600"
         width="600"
         className="relative inset-0 aspect-square h-full w-full rounded-xl border object-cover object-center shadow-2xl"

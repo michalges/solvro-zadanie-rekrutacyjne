@@ -75,7 +75,10 @@ export default function Page() {
       <div className="container flex w-full flex-row space-x-4 py-4 md:py-8">
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="aspect-square h-11 sm:h-12">
+            <Button
+              className="aspect-square h-11 sm:h-12"
+              aria-label="Open search filters"
+            >
               <Filter />
             </Button>
           </DialogTrigger>

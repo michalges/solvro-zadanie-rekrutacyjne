@@ -121,7 +121,11 @@ export function CocktailCard({ cocktail }: { cocktail: Cocktail }) {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-        <Button className="group" onClick={handleFavorite}>
+        <Button
+          className="group"
+          onClick={handleFavorite}
+          aria-label="Add cocktail to favourites"
+        >
           <Heart
             className="transition group-hover:scale-90"
             fill={isFavorite ? "var(--primary-foreground)" : "none"}
