@@ -14,11 +14,15 @@ Strona zrobiona jako zadanie rekrutacyjne do koła naukowego "Solvro" Politechni
 
 via: [github.com/Solvro/rekrutacja/](https://github.com/Solvro/rekrutacja/blob/main/frontend.md)
 
-## Screenshots
+## Użyte technologie
 
-![alt text](assets/screenshot_1.png)
+- **Next.js**
+- **Typescript**
+- **tailwindcss**
+- **Shadcn**
+- **Motion**
 
-![alt text](assets/screenshot_2.png)
+Deployment - **Vercel**
 
 ## Features
 
@@ -34,15 +38,11 @@ via: [github.com/Solvro/rekrutacja/](https://github.com/Solvro/rekrutacja/blob/m
 
   [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-solvro-zadanie-rekrutacyjne-vercel-app/ytfv9vnuxn?hl=pl&form_factor=mobile)
 
-## Użyte technologie
+## Screenshots
 
-- **Next.js**
-- **Typescript**
-- **tailwindcss**
-- **Shadcn**
-- **Motion**
+![alt text](assets/screenshot_1.png)
 
-Deployment - **Vercel**
+![alt text](assets/screenshot_2.png)
 
 ## Uruchom lokalnie
 
